@@ -1,10 +1,8 @@
 <?php
 
 
-class titular
+class titular extends Pessoa                    //Aqui se trata de uma herança. então extendemos a classe Pessoa.
 {
-    private  $cpf;
-    private $nome;
     private $endereco;
 
     public function __construct(Cpf $cpf,string $nome, Endereco $endereco)
@@ -16,26 +14,9 @@ class titular
 
     }
 
-    public function recuperaCpf(): string
-    {
-        return $this->cpf->recuperaNumero();
-    }
-
-    public function recuperaNome(): string
-    {
-        return $this->nome;
-    }
-    
-    private function validaNomeTitular(string $nomeTitular)                         //Metodo valida nome.
-    {
-        if (strlen($nomeTitular) < 5){
-            echo "Nome precisa ter no minimo 5 caracteres";
-            exit();
-        }
-    }
-
     public function recuperaEndereco(): Endereco
     {
         return $this->endereco;
     }
 }
+
