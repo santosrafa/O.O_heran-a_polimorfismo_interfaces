@@ -2,11 +2,12 @@
 
 class Pessoa
 {
-    public string $nome;
-    public  $cpf;
+    protected string $nome;             //protect :: Eu consigo acessar ele dentro da classe pessoa e nas classes filhas.
+    private  $cpf;
 
     public function __construct($nome, CPF $cpf)
     {
+        $this->validaNomeTitular($nome);
         $this->nome = $nome;
         $this->cpf = $cpf;
     }
@@ -21,7 +22,7 @@ class Pessoa
         return $this->cpf->recuperaNumero();
     }
 
-    public function validaNomeTitular(string $nomeTitular)                         //Metodo valida nome.
+    protected function validaNomeTitular(string $nomeTitular)                         //Metodo valida nome.
     {
         if (strlen($nomeTitular) < 5){
             echo "Nome precisa ter no minimo 5 caracteres";

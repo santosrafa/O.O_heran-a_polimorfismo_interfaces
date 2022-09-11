@@ -7,9 +7,7 @@ class titular extends Pessoa                    //Aqui se trata de uma herança.
 
     public function __construct(Cpf $cpf,string $nome, Endereco $endereco)
     {
-        $this ->cpf = $cpf;
-        $this->validaNomeTitular($nome);
-        $this ->nome = $nome;
+        parent::__construct($nome, $cpf);     //parent:: Significa que estou chamando classe mãe.
         $this ->endereco = $endereco;
 
     }

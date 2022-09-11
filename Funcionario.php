@@ -6,14 +6,18 @@ class Funcionario extends Pessoa                                //Aqui se trata 
 
     public function __construct($nome, CPF $cpf, $cargo)
     {
-        $this->validaNomeTitular($nome);
-        $this->nome = $nome;
-        $this->cpf = $cpf;
+        parent::__construct($nome, $cpf);
         $this->cargo = $cargo;
     }
 
     public function recuperaCargo(): string
     {
         return $this->cargo;
+    }
+
+    public function alteraNome(string $nome): void
+    {
+        $this->validaNomeTitular($nome);
+        $this->nome = $nome;
     }
 }
