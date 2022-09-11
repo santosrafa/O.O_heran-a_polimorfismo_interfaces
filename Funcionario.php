@@ -1,5 +1,10 @@
 <?php
 
+/* public permite que todos possam acessar o membro, inclusive fora da classe onde foi definido, através de uma instância.
+protected permite que a classe atual e as classes filhas tenham acesso.
+private permite que apenas a classe atual tenha acesso. */
+
+
 class Funcionario extends Pessoa                                //Aqui se trata de uma herança. então extendemos a classe Pessoa.
 {
     private string $cargo;
