@@ -1,5 +1,7 @@
 <?php
 
+namespace Modelo\Conta;
+
 
 class titular extends Pessoa                    //Aqui se trata de uma herança. então extendemos a classe Pessoa.
 {

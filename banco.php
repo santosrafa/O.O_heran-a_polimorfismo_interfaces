@@ -1,5 +1,7 @@
 <?php
 
+namespace Modelo;
+
 require_once 'conta.php';
 require_once 'Endereco.php';
 require_once 'Titular.php';

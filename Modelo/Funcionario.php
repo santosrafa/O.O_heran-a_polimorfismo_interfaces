@@ -4,6 +4,7 @@
 protected permite que a classe atual e as classes filhas tenham acesso.
 private permite que apenas a classe atual tenha acesso. */
 
+namespace Modelo;
 
 class Funcionario extends Pessoa                                //Aqui se trata de uma herança. então extendemos a classe Pessoa.
 {

@@ -1,5 +1,7 @@
 <?php
 
+namespace Modelo\Conta;
+
 /* Classe Conta */
 
 //Essas variáveis são chamadas de atributos da Conta ou objetos

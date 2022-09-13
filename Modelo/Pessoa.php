@@ -1,5 +1,7 @@
 <?php
 
+namespace Modelo;
+
 class Pessoa
 {
     protected string $nome;             //protect :: Eu consigo acessar ele dentro da classe pessoa e nas classes filhas.
