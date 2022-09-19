@@ -16,11 +16,13 @@ class Conta
     private $titular;                 
     private $saldo;            
     private static $numeroDeContas = 0;                                      //Membros estáticos. São membros da classe em si, e não de cada instância (objeto).
+    private $tipo;                                                           //tipo 1 -> conta corrente, tipo 2 -> conta poupanca.
 
-    public function __construct(Titular $titular)                           //Utilizado para qualquer inicialização que o objeto necessite antes de ser utilizado.
+    public function __construct(Titular $titular, int $tipo)                           //Utilizado para qualquer inicialização que o objeto necessite antes de ser utilizado.
     {
         $this->titular = $titular;
         $this->saldo = 0;
+        $this->tipo = $tipo;
         
         self::$numeroDeContas++;
     }
@@ -32,14 +34,20 @@ class Conta
         }
     }
 
-    public function sacar (float $valorASacar)                                //Uma função que está dentro de uma classe é chamada de método
+    public function sacar (float $valorASacar): void                                //Uma função que está dentro de uma classe é chamada de método
     {
-        if ($valorASacar > $this->saldo){
+        if ($this->tipo === 1){
+            $tarifaSaque = $valorASacar * 0.05;    
+        }else{
+            $tarifaSaque = $valorASacar * 0.03;    
+        }
+        $valorSaque = $valorASacar + $tarifaSaque;
+        if ($valorSaque > $this->saldo){
             echo "Saldo indisponivel";
             return; 
         }
         
-        $this->saldo -= $valorASacar;
+        $this->saldo -= $valorSaque;
     }
 
     public function depositar (float $valorADepositar) : void                  //void: esse metodo nao devolve nada pra gente nao tem retorno
