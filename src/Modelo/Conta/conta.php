@@ -11,7 +11,7 @@ namespace Alura\Banco\Modelo\Conta;
 //É uma boa pratica colocar as propriedades sempre privadas e os metodos publicos
 
 
-class Conta                 
+abstract class Conta                 
 {
     private $titular;                 
     private $saldo;            
@@ -37,7 +37,7 @@ class Conta
     public function sacar (float $valorASacar): void                                //Uma função que está dentro de uma classe é chamada de método
     {
         if ($this->tipo === 1){
-            $tarifaSaque = $valorASacar * 0.05;    
+            $tarifaSaque = $valorASacar * $this->percentualTarifa();    
         }else{
             $tarifaSaque = $valorASacar * 0.03;    
         }
@@ -60,15 +60,6 @@ class Conta
         $this->saldo += $valorADepositar;  
     }
 
-    public function transferir (float $valorATransferir, Conta $contaDestino) : void
-    {
-        if ($valorATransferir > $this->saldo){
-            echo "Saldo Indisponivel!";
-            return;
-        }
-        $this->sacar($valorATransferir);
-        $contaDestino->depositar($valorATransferir);
-    }
 
     public function recuperarSaldo(): float                                        //Criando metodos para acessar as propriedades.
     {
@@ -89,5 +80,7 @@ class Conta
     {
         return self::$numeroDeContas;
     }
+
+    abstract protected function percentualTarifa(): float;                          //abstract :: significa que ainda faltam coisas. Assim obrigamos todas as classes que extende de conta a utilizar esse metodo.
 }
 
