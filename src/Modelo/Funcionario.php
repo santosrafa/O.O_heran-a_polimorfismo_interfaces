@@ -9,11 +9,13 @@ namespace Alura\Banco\Modelo;
 class Funcionario extends Pessoa                                //Aqui se trata de uma herança. então extendemos a classe Pessoa.
 {
     private string $cargo;
+    private float $salario;
 
-    public function __construct($nome, CPF $cpf, $cargo)
+    public function __construct($nome, CPF $cpf, $cargo, $salario)
     {
         parent::__construct($nome, $cpf);
         $this->cargo = $cargo;
+        $this->salario = $salario;
     }
 
     public function recuperaCargo(): string
@@ -25,5 +27,15 @@ class Funcionario extends Pessoa                                //Aqui se trata 
     {
         $this->validaNomeTitular($nome);
         $this->nome = $nome;
+    }
+
+    public function recuperaSalario(): float
+    {
+        return $this->salario;
+    }
+
+    public function calculaBonificacao(): float
+    {
+        return $this->salario * 0.1;
     }
 }
