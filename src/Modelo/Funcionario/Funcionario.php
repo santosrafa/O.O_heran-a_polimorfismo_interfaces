@@ -11,19 +11,12 @@ use Alura\Banco\Modelo\Pessoa;
 
 abstract class Funcionario extends Pessoa                                //Aqui se trata de uma herança. então extendemos a classe Pessoa.
 {
-    private string $cargo;
     private float $salario;
 
-    public function __construct($nome, Cpf $cpf, $cargo, $salario)
+    public function __construct($nome, Cpf $cpf, $salario)
     {
         parent::__construct($nome, $cpf);
-        $this->cargo = $cargo;
         $this->salario = $salario;
-    }
-
-    public function recuperaCargo(): string
-    {
-        return $this->cargo;
     }
 
     public function alteraNome(string $nome): void
@@ -35,7 +28,7 @@ abstract class Funcionario extends Pessoa                                //Aqui 
     public function recebeAumento(float $valorAumento): void
     {
         if ($valorAumento < 0){
-            echo "Aumento deve ser positivo!";
+            echo "O aumento deve ser positivo!";
             return;
         }
 
@@ -47,8 +40,5 @@ abstract class Funcionario extends Pessoa                                //Aqui 
         return $this->salario;
     }
 
-    public function calculaBonificacao(): float
-    {
-        return $this->salario * 0.1;
-    }
+    abstract public function calculaBonificacao(): float; //Todo funcionario terá essa implementação.
 }
