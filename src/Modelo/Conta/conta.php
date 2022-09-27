@@ -2,78 +2,60 @@
 
 namespace Alura\Banco\Modelo\Conta;
 
-/* Classe Conta */
-
-//Essas variáveis são chamadas de atributos da Conta ou objetos
-//-> Esse simbolo significa que estou acessando um atributo
-//public :: Significa que este dado será publico
-//Classe é a forma do bolo e objeto é bolo feito.
-//É uma boa pratica colocar as propriedades sempre privadas e os metodos publicos
-
-
-abstract class Conta                 
+abstract class Conta
 {
-    private $titular;                 
-    private $saldo;            
-    private static $numeroDeContas = 0;                                      //Membros estáticos. São membros da classe em si, e não de cada instância (objeto).
-    private $tipo;                                                           //tipo 1 -> conta corrente, tipo 2 -> conta poupanca.
+    private $titular;
+    protected $saldo;
+    private static $numeroDeContas = 0;
 
-    public function __construct(Titular $titular, int $tipo)                           //Utilizado para qualquer inicialização que o objeto necessite antes de ser utilizado.
+    public function __construct(Titular $titular)
     {
         $this->titular = $titular;
         $this->saldo = 0;
-        $this->tipo = $tipo;
-        
+
         self::$numeroDeContas++;
     }
 
     public function __destruct()
     {
-        if (self::$numeroDeContas > 2){
-            echo "Há mais de uma conta ativa!";
-        }
+        self::$numeroDeContas--;
     }
 
-    public function sacar (float $valorASacar): void                                //Uma função que está dentro de uma classe é chamada de método
+    public function sacar(float $valorASacar): void
     {
-        if ($this->tipo === 1){
-            $tarifaSaque = $valorASacar * $this->percentualTarifa();    
-        }else{
-            $tarifaSaque = $valorASacar * 0.03;    
-        }
+        $tarifaSaque = $valorASacar * $this->percentualTarifa();
         $valorSaque = $valorASacar + $tarifaSaque;
-        if ($valorSaque > $this->saldo){
-            echo "Saldo indisponivel";
-            return; 
+        if ($valorSaque > $this->saldo) {
+            echo "Saldo indisponível";
+            return;
         }
-        
+
         $this->saldo -= $valorSaque;
     }
 
-    public function depositar (float $valorADepositar) : void                  //void: esse metodo nao devolve nada pra gente nao tem retorno
+    public function depositar(float $valorADepositar): void
     {
-        if ($valorADepositar < 0){
+        if ($valorADepositar < 0) {
             echo "Valor precisa ser positivo";
-            return;                                                             //return :: quando o metodo chegar no return ele para a execução
+            return;
         }
-        
-        $this->saldo += $valorADepositar;  
+
+        $this->saldo += $valorADepositar;
     }
 
-
-    public function recuperarSaldo(): float                                        //Criando metodos para acessar as propriedades.
+    public function recuperarSaldo(): float
     {
         return $this->saldo;
     }
 
-    public function recuperarNomeTitular(): string
+    public function recuperaNomeTitular(): string
     {
-        return  $this->titular->recuperaNome();
+        return $this->titular->recuperaNome();
     }
 
-    public function recuperarCpfTitular(): string
+    public function recuperaCpfTitular(): string
     {
-        return  $this->titular->recuperaCpf();
+        return $this->titular->recuperaCpf();
     }
 
     public static function recuperaNumeroDeContas(): int
@@ -81,6 +63,5 @@ abstract class Conta
         return self::$numeroDeContas;
     }
 
-    abstract protected function percentualTarifa(): float;                          //abstract :: significa que ainda faltam coisas. Assim obrigamos todas as classes que extende de conta a utilizar esse metodo.
+    abstract protected function percentualTarifa(): float;
 }
-
