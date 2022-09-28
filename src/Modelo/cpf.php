@@ -2,7 +2,7 @@
 
 namespace Alura\Banco\Modelo;
 
-class Cpf
+final class Cpf                                     //Se eu digo que uma classe é final eu impesso a herança dela. Assim não é possível mais extende-la
 {
     private  $cpf;
 

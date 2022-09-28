@@ -24,7 +24,7 @@ class Pessoa
         return $this->cpf->recuperaNumero();
     }
 
-    protected function validaNomeTitular(string $nomeTitular)                         //Metodo valida nome.
+    final protected function validaNomeTitular(string $nomeTitular)                         //Metodo valida nome.  Usando final também não será mais possível sobreescreve-lo.
     {
         if (strlen($nomeTitular) < 5){
             echo "Nome precisa ter no minimo 5 caracteres";
@@ -32,3 +32,4 @@ class Pessoa
         }
     }
 }
+
